@@ -317,7 +317,7 @@ export class StreamableHTTPClientTransport implements Transport {
       try {
         // Create a pipeline: binary stream -> text decoder -> SSE parser
         const reader = stream
-          .pipeThrough(new TextDecoderStream())
+          .pipeThrough(new TextDecoderStream() as unknown as ReadableWritablePair<string, Uint8Array>)
           .pipeThrough(new EventSourceParserStream())
           .getReader();
 
