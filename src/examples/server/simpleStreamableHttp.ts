@@ -648,7 +648,7 @@ if (useOAuth && authMiddleware) {
   app.delete('/mcp', mcpDeleteHandler);
 }
 
-app.listen(MCP_PORT, (error) => {
+app.listen(MCP_PORT, (error?: Error) => {
   if (error) {
     console.error('Failed to start server:', error);
     process.exit(1);

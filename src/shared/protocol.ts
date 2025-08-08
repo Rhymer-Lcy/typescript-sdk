@@ -770,8 +770,15 @@ export function mergeCapabilities<
 >(base: T, additional: T): T {
   return Object.entries(additional).reduce(
     (acc, [key, value]) => {
-      if (value && typeof value === "object") {
-        acc[key] = acc[key] ? { ...acc[key], ...value } : value;
+      if (
+        value &&
+        typeof value === "object" &&
+        !Array.isArray(value) &&
+        acc[key] &&
+        typeof acc[key] === "object" &&
+        !Array.isArray(acc[key])
+      ) {
+        acc[key] = { ...acc[key], ...value };
       } else {
         acc[key] = value;
       }

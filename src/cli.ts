@@ -3,7 +3,7 @@ import WebSocket from "ws";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (global as any).WebSocket = WebSocket;
 
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import { Client } from "./client/index.js";
 import { SSEClientTransport } from "./client/sse.js";
 import { StdioClientTransport } from "./client/stdio.js";
@@ -63,7 +63,7 @@ async function runServer(port: number | null) {
 
     let servers: Server[] = [];
 
-    app.get("/sse", async (req, res) => {
+    app.get("/sse", async (req: Request, res: Response) => {
       console.log("Got new SSE connection");
 
       const transport = new SSEServerTransport("/message", res);
@@ -102,7 +102,7 @@ async function runServer(port: number | null) {
       await transport.handlePostMessage(req, res);
     });
 
-    app.listen(port, (error) => {
+    app.listen(port, (error?: Error) => {
       if (error) {
         console.error('Failed to start server:', error);
         process.exit(1);
