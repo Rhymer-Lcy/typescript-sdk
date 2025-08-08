@@ -778,7 +778,7 @@ export function mergeCapabilities<
         typeof acc[key] === "object" &&
         !Array.isArray(acc[key])
       ) {
-        acc[key] = { ...acc[key], ...value };
+        acc[key] = { ...(acc[key] as object), ...(value as object) } as any;
       } else {
         acc[key] = value;
       }
