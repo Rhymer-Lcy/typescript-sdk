@@ -3,7 +3,8 @@
   "compilerOptions": {
     "module": "Node16",
     "moduleResolution": "node16",
-    "outDir": "./dist/cjs"
+    "outDir": "./dist/cjs",
+    "typeRoots": ["./types", "./node_modules/@types"]
   },
   "exclude": ["**/*.test.ts", "src/__mocks__/**/*"]
 }
