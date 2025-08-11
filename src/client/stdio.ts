@@ -124,6 +124,7 @@ export class StdioClientTransport implements Transport {
         {
           // merge default env with server env because mcp server needs some env vars
           env: {
+            NODE_ENV: process.env.NODE_ENV ?? "production",
             ...getDefaultEnvironment(),
             ...this._serverParams.env,
           },
