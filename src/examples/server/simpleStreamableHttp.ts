@@ -9,7 +9,7 @@ import { CallToolResult, GetPromptResult, isInitializeRequest, PrimitiveSchemaDe
 import { InMemoryEventStore } from '../shared/inMemoryEventStore.js';
 import { setupAuthServer } from './demoInMemoryOAuthProvider.js';
 import { OAuthMetadata } from '../../shared/auth.js';
-import { checkResourceAllowed } from 'src/shared/auth-utils.js';
+import { checkResourceAllowed } from '../../shared/auth-utils.js';
 
 import cors from 'cors';
 
