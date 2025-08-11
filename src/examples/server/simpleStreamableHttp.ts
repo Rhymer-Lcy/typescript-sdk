@@ -8,7 +8,7 @@ import { requireBearerAuth } from '../../server/auth/middleware/bearerAuth.js';
 import { CallToolResult, GetPromptResult, isInitializeRequest, PrimitiveSchemaDefinition, ReadResourceResult, ResourceLink } from '../../types.js';
 import { InMemoryEventStore } from '../shared/inMemoryEventStore.js';
 import { setupAuthServer } from './demoInMemoryOAuthProvider.js';
-import { OAuthMetadata } from 'src/shared/auth.js';
+import { OAuthMetadata } from '../../shared/auth.js';
 import { checkResourceAllowed } from 'src/shared/auth-utils.js';
 
 import cors from 'cors';
