@@ -1,7 +1,9 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "./dist/esm"
+    "outDir": "./dist/esm",
+    "moduleResolution": "node16",
+    "typeRoots": ["./types", "./node_modules/@types"]
   },
   "exclude": ["**/*.test.ts", "src/__mocks__/**/*"]
 }

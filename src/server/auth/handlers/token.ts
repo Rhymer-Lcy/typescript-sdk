@@ -2,7 +2,7 @@ import { z } from "zod";
 import express, { RequestHandler } from "express";
 import { OAuthServerProvider } from "../provider.js";
 import cors from "cors";
-import { verifyChallenge } from "pkce-challenge";
+import pkceChallenge from "pkce-challenge";
 import { authenticateClient } from "../middleware/clientAuth.js";
 import { rateLimit, Options as RateLimitOptions } from "express-rate-limit";
 import { allowedMethods } from "../middleware/allowedMethods.js";
@@ -14,6 +14,11 @@ import {
   TooManyRequestsError,
   OAuthError
 } from "../errors.js";
+
+function verifyChallenge(code_verifier: string, code_challenge: string): boolean {
+  const generated = (pkceChallenge as unknown as (v: string) => { code_challenge: string })(code_verifier).code_challenge;
+  return generated === code_challenge;
+}
 
 export type TokenHandlerOptions = {
   provider: OAuthServerProvider;
@@ -98,7 +103,7 @@ export function tokenHandler({ provider, rateLimit: rateLimitConfig }: TokenHand
           // (e.g. to validate code_verifier in upstream server)
           if (!skipLocalPkceValidation) {
             const codeChallenge = await provider.challengeForAuthorizationCode(client, code);
-            if (!(await verifyChallenge(code_verifier, codeChallenge))) {
+            if (!verifyChallenge(code_verifier, codeChallenge)) {
               throw new InvalidGrantError("code_verifier does not match the challenge");
             }
           }

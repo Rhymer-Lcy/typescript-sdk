@@ -1,9 +1,10 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "outDir": "./dist/cjs"
+    "module": "Node16",
+    "moduleResolution": "node16",
+    "outDir": "./dist/cjs",
+    "typeRoots": ["./types", "./node_modules/@types"]
   },
   "exclude": ["**/*.test.ts", "src/__mocks__/**/*"]
 }
